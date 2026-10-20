@@ -84,14 +84,18 @@ export default class LogsModel {
     {
         const conection = await Connection.connectSingle();
         try {
-            const sql = `CREATE TABLE IF NOT EXISTS ${this.#tableName} (
+            const sql = `
+            DROP TABLE IF EXISTS ${this.#tableName};
+
+            CREATE TABLE IF NOT EXISTS ${this.#tableName} (
                 id INT AUTO_INCREMENT PRIMARY KEY,
                 send_file_time VARCHAR(255) NOT NULL,
                 create_file_time VARCHAR(255) NOT NULL,
                 header VARCHAR(255) NOT NULL,
-                text_lines VARCHAR(21844) NOT NULL,
+                text_lines TEXT NOT NULL,
                 origen VARCHAR(255) NOT NULL
-            )`;
+            )
+            `;
             await conection.execute(sql);
         } catch ( err ) {
             console.log("Error:" + err);
