@@ -13,11 +13,11 @@ export default class LogsControl
             for (const key in files) {
                 if (Object.hasOwnProperty.call(files, key)) {
                     const file = files[key];
-                    const send_time = file.send_time;
-                    const create_time = file.create_time;
-                    const header = file.header;
-                    const origen = file.origen;
-                    const text_lines = file.text_lines;
+                    const send_time = file.SendFileTime;
+                    const create_time = file.CreationTime;
+                    const header = file.Header;
+                    const origen = file.Origen;
+                    const text_lines = file.TextLines;
 
                     console.log(send_time, create_time, header, origen, text_lines);
 
@@ -70,11 +70,11 @@ export default class LogsControl
         {
             const data = req.body;
             const id = data.id;
-            const origen = data.origen;
-            const header = data.header;
-            const send_file_time = data.send_file_time;
-            const create_file_time = data.create_file_time;
-            const text_lines = data.text_lines;
+            const origen = data.Origen;
+            const header = data.Header;
+            const send_file_time = data.SendFileTime;
+            const create_file_time = data.CreationTime;
+            const text_lines = data.TextLines;
 
             if(id && origen && header && send_file_time && create_file_time && text_lines)
             {

@@ -14,7 +14,7 @@ export default class LogsModel {
         this.#create_time = create_time;
         this.#header = header;
         this.#text_lines = text_lines;
-         this.#origen = origen;
+        this.#origen = origen;
 
         this.init();
     }
@@ -106,11 +106,11 @@ export default class LogsModel {
                 const sql = `INSERT INTO ${this.#tableName} (send_file_time, create_file_time, header, text_lines, origen)
                             VALUES (?, ?, ?, ?, ?)`;
                 const param = [
-                    this.send_time,
-                    this.create_time,
-                    this.header,
-                    this.text_lines,
-                    this.origen
+                    this.#send_time,
+                    this.#create_time,
+                    this.#header,
+                    this.#text_lines,
+                    this.#origen
                 ];
 
                 await conection.execute(sql, param);
@@ -135,12 +135,12 @@ export default class LogsModel {
                             origen = ?
                             WHERE id = ?`;            
                 const param = [
-                    this.send_time,
-                    this.create_time,
-                    this.header,
-                    this.text_lines,
-                    this.origen,
-                    this.id
+                    this.#send_time,
+                    this.#create_time,
+                    this.#header,
+                    this.#text_lines,
+                    this.#origen,
+                    this.#id
                 ];
                 await conection.execute(sql, param);
                 await conection.commit();
@@ -180,11 +180,11 @@ export default class LogsModel {
                 const client = new LogsModel
                 (
                     item.id,
-                    item.origen,
-                    item.header,
-                    item.send_file_time,
-                    item.create_file_time,
-                    item.text_lines
+                    item.Origen,
+                    item.Header,
+                    item.SendFileTime,
+                    item.CreationTime,
+                    item.TextLines
                 );
                 response.push(client);
                                         
@@ -208,11 +208,11 @@ export default class LogsModel {
                 const client = new LogsModel
                 (
                     item.id,
-                    item.origen,
-                    item.header,
-                    item.send_file_time,
-                    item.create_file_time,
-                    item.text_lines
+                    item.Origen,
+                    item.Header,
+                    item.SendFileTime,
+                    item.CreationTime,
+                    item.TextLines
                 );
                 response.push(client);
                                         
