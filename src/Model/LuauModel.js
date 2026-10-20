@@ -1,6 +1,6 @@
 import Connection from "../DataBase/connectMySQL.js";
 
-export default class LogsModel {
+export default class LuauModel {
     #id;
     #send_time;
     #origen;

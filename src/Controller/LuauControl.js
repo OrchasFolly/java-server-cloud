@@ -1,4 +1,4 @@
-import LuauModel from "../Model/LogsModel.js";
+import LuauModel from "../Model/LuauModel.js";
 
 export default class LuauControl
 {
@@ -47,7 +47,7 @@ export default class LuauControl
             });
         }
     }
-    
+
     static consult(req, res)
     {
         res.type('application/json');
