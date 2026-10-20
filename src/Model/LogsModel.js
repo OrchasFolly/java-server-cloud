@@ -182,11 +182,11 @@ export default class LogsModel {
                 const client = new LogsModel
                 (
                     item.id,
-                    item.Origen,
-                    item.Header,
-                    item.SendFileTime,
-                    item.CreationTime,
-                    item.TextLines
+                    item.origen,
+                    item.header,
+                    item.send_time,
+                    item.create_time,
+                    item.text_lines
                 );
                 response.push(client);
                                         
@@ -210,11 +210,11 @@ export default class LogsModel {
                 const client = new LogsModel
                 (
                     item.id,
-                    item.Origen,
-                    item.Header,
-                    item.SendFileTime,
-                    item.CreationTime,
-                    item.TextLines
+                    item.origen,
+                    item.header,
+                    item.send_time,
+                    item.create_time,
+                    item.text_lines
                 );
                 response.push(client);
                                         
