@@ -85,8 +85,6 @@ export default class LogsModel {
         const conection = await Connection.connectSingle();
         try {
             const sql = `
-            DROP TABLE IF EXISTS ${this.#tableName};
-
             CREATE TABLE IF NOT EXISTS ${this.#tableName} (
                 id INT AUTO_INCREMENT PRIMARY KEY,
                 send_file_time VARCHAR(255) NOT NULL,
