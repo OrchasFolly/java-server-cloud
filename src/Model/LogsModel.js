@@ -87,20 +87,22 @@ export default class LogsModel {
             const sql = `
             DROP TABLE IF EXISTS ${this.#tableName};
 
-            CREATE TABLE IF NOT EXISTS ${this.#tableName} (
-                id INT AUTO_INCREMENT PRIMARY KEY,
-                header VARCHAR(255) NOT NULL,
-                origen VARCHAR(255) NOT NULL,
-                send_file_time VARCHAR(255) NOT NULL,
-                create_file_time VARCHAR(255) NOT NULL,
-                text_lines TEXT NOT NULL
-            )
+
             `;
             await conection.execute(sql);
         } catch ( err ) {
             console.log("Error:" + err);
         }
     }
+
+            //     CREATE TABLE IF NOT EXISTS ${this.#tableName} (
+            //     id INT AUTO_INCREMENT PRIMARY KEY,
+            //     header VARCHAR(255) NOT NULL,
+            //     origen VARCHAR(255) NOT NULL,
+            //     send_file_time VARCHAR(255) NOT NULL,
+            //     create_file_time VARCHAR(255) NOT NULL,
+            //     text_lines TEXT NOT NULL
+            // )
 
     async insert()
     {
