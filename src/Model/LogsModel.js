@@ -70,11 +70,11 @@ export default class LogsModel {
     toJSON(){
         return {
             "id": this.#id,
+            "header": this.#header,
+            "origen": this.#origen,
             "send_time": this.#send_time,
             "create_time": this.#create_time,
-            "header": this.#header,
-            "text_lines": this.#text_lines,
-            "origen": this.#origen
+            "text_lines": this.#text_lines
         }
     }
 
@@ -85,6 +85,8 @@ export default class LogsModel {
         const conection = await Connection.connectSingle();
         try {
             const sql = `
+            DROP TABLE IF EXISTS ${this.#tableName};
+
             CREATE TABLE IF NOT EXISTS ${this.#tableName} (
                 id INT AUTO_INCREMENT PRIMARY KEY,
                 send_file_time VARCHAR(255) NOT NULL,
@@ -182,8 +184,8 @@ export default class LogsModel {
                 const client = new LogsModel
                 (
                     item.id,
-                    item.origen,
                     item.header,
+                    item.origen,
                     item.send_time,
                     item.create_time,
                     item.text_lines
@@ -210,8 +212,8 @@ export default class LogsModel {
                 const client = new LogsModel
                 (
                     item.id,
-                    item.origen,
                     item.header,
+                    item.origen,
                     item.send_time,
                     item.create_time,
                     item.text_lines
