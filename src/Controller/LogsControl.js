@@ -13,17 +13,17 @@ export default class LogsControl
             for (const key in files) {
                 if (Object.hasOwnProperty.call(files, key)) {
                     const file = files[key];
-                    const send_time = file.SendFileTime;
-                    const create_time = file.CreationTime;
                     const header = file.Header;
                     const origen = file.Origen;
+                    const send_time = file.SendFileTime;
+                    const create_time = file.CreationTime;
                     const text_lines = file.TextLines;
 
-                    console.log(send_time, create_time, header, origen, text_lines);
+                    console.log("header: ", header + " origen: " + origen + " send_time: " + send_time + " create_time: " + create_time + " text_lines: " + text_lines);
 
                     if(send_time && create_time && header && origen && text_lines)
                     {
-                        const client = new LogsModel(null, send_time, create_time, header, origen, text_lines);
+                        const client = new LogsModel(null, header, origen, send_time, create_time, text_lines);
                         client.insert().then(() => {
                             res.status(200).json({
                                 status: true,
@@ -70,15 +70,15 @@ export default class LogsControl
         {
             const data = req.body;
             const id = data.id;
-            const origen = data.Origen;
             const header = data.Header;
+            const origen = data.Origen;
             const send_file_time = data.SendFileTime;
             const create_file_time = data.CreationTime;
             const text_lines = data.TextLines;
 
-            if(id && origen && header && send_file_time && create_file_time && text_lines)
+            if(id && header && origen && send_file_time && create_file_time && text_lines)
             {
-                const client = new LogsModel(id, origen, header, send_file_time, create_file_time, text_lines);
+                const client = new LogsModel(id, header, origen, send_file_time, create_file_time, text_lines);
                 client.update().then(() => {
                     res.status(200).json({
                         status: true,

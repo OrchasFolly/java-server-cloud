@@ -8,13 +8,13 @@ export default class LogsModel {
     #text_lines;
     #origen;
 
-    constructor(id, send_time, create_time, header, origen, text_lines) {
+    constructor(id, header, origen, send_time, create_time, text_lines) {
         this.#id = id;
+        this.#header = header;
+        this.#origen = origen;
         this.#send_time = send_time;
         this.#create_time = create_time;
-        this.#header = header;
         this.#text_lines = text_lines;
-        this.#origen = origen;
 
         this.init();
     }
@@ -25,6 +25,22 @@ export default class LogsModel {
 
     set id(newId) {
         this.#id = newId;
+    }
+
+    get header() {
+        return this.#header;
+    }
+
+    set header(newHeader) {
+        this.#header = newHeader;
+    }
+
+    get origen() {
+        return this.#origen;
+    }
+
+    set origen(newOrigen) {
+        this.#origen = newOrigen;
     }
 
     get send_time() {
@@ -43,28 +59,12 @@ export default class LogsModel {
         this.#create_time = newCreateTime;
     }
 
-    get header() {
-        return this.#header;
-    }
-
-    set header(newHeader) {
-        this.#header = newHeader;
-    }
-
     get text_lines() {
         return this.#text_lines;
     }
 
     set text_lines(newTextLines) {
         this.#text_lines = newTextLines;
-    }
-
-    get origen() {
-        return this.#origen;
-    }
-
-    set origen(newOrigen) {
-        this.#origen = newOrigen;
     }
 
     toJSON(){
@@ -89,11 +89,11 @@ export default class LogsModel {
 
             CREATE TABLE IF NOT EXISTS ${this.#tableName} (
                 id INT AUTO_INCREMENT PRIMARY KEY,
+                header VARCHAR(255) NOT NULL,
+                origen VARCHAR(255) NOT NULL,
                 send_file_time VARCHAR(255) NOT NULL,
                 create_file_time VARCHAR(255) NOT NULL,
-                header VARCHAR(255) NOT NULL,
-                text_lines TEXT NOT NULL,
-                origen VARCHAR(255) NOT NULL
+                text_lines TEXT NOT NULL
             )
             `;
             await conection.execute(sql);
@@ -107,14 +107,14 @@ export default class LogsModel {
             const conection = await Connection.connectSingle();
             try {
                 await conection.beginTransaction();
-                const sql = `INSERT INTO ${this.#tableName} (send_file_time, create_file_time, header, text_lines, origen)
+                const sql = `INSERT INTO ${this.#tableName} (header, origen, send_file_time, create_file_time, text_lines)
                             VALUES (?, ?, ?, ?, ?)`;
                 const param = [
+                    this.#header,
+                    this.#origen,
                     this.#send_time,
                     this.#create_time,
-                    this.#header,
-                    this.#text_lines,
-                    this.#origen
+                    this.#text_lines
                 ];
 
                 await conection.execute(sql, param);
@@ -132,18 +132,18 @@ export default class LogsModel {
             try {
                 await conection.beginTransaction();
                 const sql = `UPDATE ${this.#tableName} SET 
-                            send_file_time = ?
-                            create_file_time = ?
-                            header = ?
                             text_lines = ?
+                            create_file_time = ?
+                            send_file_time = ?
                             origen = ?
+                            header = ?
                             WHERE id = ?`;            
                 const param = [
-                    this.#send_time,
-                    this.#create_time,
-                    this.#header,
                     this.#text_lines,
+                    this.#create_time,
+                    this.#send_time,
                     this.#origen,
+                    this.#header,
                     this.#id
                 ];
                 await conection.execute(sql, param);
