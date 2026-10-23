@@ -184,8 +184,8 @@ export default class LogsModel {
                     item.id,
                     item.header,
                     item.origen,
-                    item.send_time,
-                    item.create_time,
+                    item.send_file_time,
+                    item.create_file_time,
                     item.text_lines
                 );
                 response.push(client);
@@ -212,8 +212,8 @@ export default class LogsModel {
                     item.id,
                     item.header,
                     item.origen,
-                    item.send_time,
-                    item.create_time,
+                    item.send_file_time,
+                    item.create_file_time,
                     item.text_lines
                 );
                 response.push(client);
